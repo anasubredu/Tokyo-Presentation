@@ -16,7 +16,7 @@ export default function SecondView() {
 				backgroundColor: "#14171A",
 			}}
 		>
-			<h1 className="sv-title">BEST DESTINATION</h1>
+			<h1 className="sv-title">THIS IS A TEST</h1>
 
 			<div className="img-container">
 				<img src={FirtsImage}></img>
