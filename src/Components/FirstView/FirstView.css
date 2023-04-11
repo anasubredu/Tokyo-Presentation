@@ -1,0 +1,130 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.navbar {
+    height: 50px;
+    width: 100vw;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.navbar > h1 {
+    font-family: 'Italiana', serif;
+    font-weight: 400;
+    margin-left: 60px;
+    color: #fff;
+}
+
+.nav-buttons {
+    width: 35%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.nav-btn {
+    font-family: 'Italiana', serif;
+    font-size: 20px;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.content-container {
+    height: calc(100vh - 156px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.discover {
+    font-size: 30px;
+    letter-spacing: 10px;
+    color: #fff;
+}
+
+.page-title {
+    font-family: 'Italiana', serif;
+    color: #fff;
+    font-size: 65px;
+    letter-spacing: 50px;
+    margin: 40px 0;
+    padding-left: 55px;
+}
+
+.social-media {
+    border: 1px solid green;
+    width: 10px;
+    height: 5px;
+}
+
+.bottom-part {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.scroll-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.scroll {
+    color: #fff;
+    font-weight: 400;
+    letter-spacing: 10px;
+    font-size: 25px;
+}
+
+.line {
+    height: 60px;
+    border-left: 1px solid #fff;
+}
+
+.icons-container {
+    width: 15%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.insta-icon {
+    width: 60px;
+    height: 60px;
+}
+
+.page-count {
+    display: flex;
+    align-items: baseline;
+}
+
+.from-pg {
+    font-family: 'Irish Grover', cursive;
+    font-size: 70px;
+    color: #fff;
+    font-weight: 400;
+}
+
+.horizontal-line {
+    width: 100px;
+    border-bottom: 2px solid #fff;
+}
+
+.to-pg {
+    font-family: 'Irish Grover', cursive;
+    font-size: 60px;
+    color: #fff;
+    font-weight: 400;
+}

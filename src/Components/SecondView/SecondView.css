@@ -1,0 +1,26 @@
+.sv-title {
+    color: #D3D3D3;
+    font-size: 60px;
+    font-weight: 400;
+    text-align: center;
+    margin: 20px 0 40px 0;
+}
+
+.img-container {
+    display: flex;
+    justify-content: space-evenly;
+    height: 50%;
+}
+
+.presentation {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 30%;
+    margin: 20px 200px;
+}
+
+.paragraph {
+    color: #D3D3D3;
+    font-size: 17px;
+}
