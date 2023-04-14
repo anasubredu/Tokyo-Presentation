@@ -4,9 +4,64 @@ import SecondImage from "../../img/second-img.svg";
 import ThirdImage from "../../img/third-img.svg";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/all";
-import { useEffect } from "react";
+import { useLayoutEffect, useRef, useEffect, useMemo, useState } from "react";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function SecondView() {
+	const targetContainer = useRef(null);
+
+	const isContainerInViewPort = useIsInViewport(targetContainer);
+
+	useLayoutEffect(() => {
+		let myContext;
+
+		if (isContainerInViewPort) {
+			myContext = gsap.context((self) => {
+				const leftImg = self.selector(".first");
+				const rightImg = self.selector(".last");
+
+				gsap.fromTo(
+					leftImg,
+					{
+						x: -200,
+						scrollTrigger: {
+							trigger: leftImg,
+							start: "top 80%",
+							toggleActions: "restart none none none",
+						},
+					},
+					{
+						x: 200,
+						duration: 1,
+					}
+				);
+
+				gsap.fromTo(
+					rightImg,
+					{
+						x: 200,
+						scrollTrigger: {
+							trigger: rightImg,
+							start: "top 80%",
+							toggleActions: "restart none none none",
+						},
+					},
+					{
+						x: -200,
+						duration: 1,
+					}
+				);
+			}, targetContainer); // <- Scope!
+		}
+
+		return () => {
+			if (myContext) {
+				myContext.revert(); // <- Cleanup!
+			}
+		};
+	}, [isContainerInViewPort]);
+
 	return (
 		<div
 			style={{
@@ -18,12 +73,12 @@ export default function SecondView() {
 		>
 			<h1 className="sv-title">BEST DESTINATION</h1>
 
-			<div className="img-container">
-				<img src={FirtsImage}></img>
+			<div className="img-container" ref={targetContainer}>
+				<img className="first" src={FirtsImage} alt="tokyo_img"></img>
 
-				<img src={SecondImage}></img>
+				<img src={SecondImage} alt="tokyo_img"></img>
 
-				<img src={ThirdImage}></img>
+				<img className="last" src={ThirdImage} alt="tokyo_img"></img>
 			</div>
 
 			<div className="presentation">
@@ -59,4 +114,33 @@ export default function SecondView() {
 			</div>
 		</div>
 	);
+}
+
+export function useIsInViewport(ref) {
+	// variabila interna de state pe care o intoarcem in return
+	const [isIntersecting, setIsIntersecting] = useState(false);
+
+	// creem in obiect de tip IntersectionObserver si setam state-ul variabilei interne 'isIntersecting' in true atunci cand un element se intersecteaza cu viewport-ul
+	const observer = useMemo(
+		() =>
+			new IntersectionObserver(([entry]) =>
+				setIsIntersecting(entry.isIntersecting)
+			),
+		[]
+	);
+
+	// useEffect ruleaza dupa pictare/randare, atunci cand unul dintre elementele din array-ul de dependinte se schimba '[ref, observer]'
+
+	useEffect(() => {
+		// pasam ref-ul primit ca parametru sa fie observat de obiectul nostru Observer
+		observer.observe(ref.current);
+
+		// Cleanup -- Functia de mai jos se exectuta inainte sa fie pictat iar componenta.
+		// Se numeste functie de cleanup unde deconectam observerul nostru sa nu mai urmareasca elementul de ref
+		return () => {
+			observer.disconnect();
+		};
+	}, [ref, observer]);
+
+	return isIntersecting;
 }
